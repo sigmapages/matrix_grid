@@ -1,17 +1,55 @@
+matrix = {            
+    "1": "a",            
+    "2": "b",            
+    "3": "c",            
+    "4": "d",            
+    "5": "e",            
+    "6": "f",           
+}            
+
+upper = False
+
+guide_text = """
+TS Computing Beta Guide:
+
+- Keys 1-26: a-z
+- 27: Shift (Upper for next character)
+- 28: Backspace (remove last character)
+- 100: Guide (show this message)
+- 0: Exit
+
+Example: 1 2 27 3 -> a b C
 """
-© Copyright [Sigmapages] Warning: Do not copy my idea, we have license
- """
+
 while True:
-    user = input("Type(0, 1, 2, 3)")
-    if int(user) == 1: 
-	    print("a")
-    elif int(user) == 2:
-	    print("b")
-    elif int(user) == 3:
-        print("c")
-    elif int(user) == 0:
-    	print(" ")
-    elif user.lower == "quit":
-    	break
-    else: 
-        print("The beta version is limited")
+    user_input = input("Enter keys (1-6, 27=Shift, 28=Backspace, 100=Guide, 0=Exit): ").strip()
+    
+    # Reset output_list mỗi lần nhập mới
+    output_list = []
+
+    text = user_input.split(" ")
+    show_guide = False
+
+    for t in text:
+        if t == "0":
+            exit()
+        elif t == "100": # Guide
+            show_guide = True
+        elif t == "27": # Shift
+            upper = True
+        elif t == "28": # Backspace
+            if output_list:
+                output_list.pop()
+        elif t in matrix:
+            char = matrix[t]
+            if upper:
+                char = char.upper()
+                upper = False
+            output_list.append(char)
+        else:
+            print(f"Error: '{t}' is invalid")
+
+    if show_guide:
+        print(guide_text)
+    else:
+        print("".join(output_list))
