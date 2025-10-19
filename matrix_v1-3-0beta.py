@@ -12,7 +12,7 @@ upper = False
 guide_text = """
 TS Computing Beta Guide:
 
-- Keys 1-26: a-z
+- Keys 1-6: a-z
 - 27: Shift (Upper for next character)
 - 28: Backspace (remove last character)
 - 100: Guide (show this message)
